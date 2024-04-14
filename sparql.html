@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPARQL Query Example</title>
+    <script>
+        const SPARQL_ENDPOINT = "http://127.0.0.1:5000/sparql";
+        async function executeQuery() {
+            const query = `PREFIX nuu: <http://nuu.aroma#> SELECT ?p ?o WHERE{ nuu:依蘭精油 ?p ?o. }
+                `;
+            try {
+                const response = await fetch(SPARQL_ENDPOINT, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: `query=${encodeURIComponent(query)}`
+                });
+
+                if (!response.ok) {
+                    throw new Error("HTTP error " + response.status);
+                }
+
+                const jsonResponse = await response.json();
+                const results = jsonResponse.results;
+                console.log(results);//結果
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <button onclick="executeQuery()">Execute Query</button>
+</body>
+
+</html>
