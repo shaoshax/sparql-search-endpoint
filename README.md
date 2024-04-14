@@ -1,4 +1,4 @@
-## 透過Flask套件建立一個Sparql查詢的API，並將回應內容轉為json格式
+## 透過Flask套件建立一個Sparql查詢的API
 需依循下方指令安裝套件Flask,Owlready2,flask-cors
 ```
 pip install Flask
